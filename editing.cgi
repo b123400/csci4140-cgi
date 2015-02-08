@@ -72,13 +72,13 @@ else:
 
 	elif arguments["action"].value == "lomo":
 		command = """
-		convert "%s" -channel R -level 33%% -channel G -level 33% "%s"
+		convert "%s" -channel R -level 33%% -channel G -level 33%% "%s"
 		""" % (path, outpath)
 
 	elif arguments["action"].value == "lens flare":
 		command = """
 		convert lensflare.png -resize %sx tmp.png;
-		composite -compose screen -gravity northwest tmp.png "%s" "%s"
+		composite -compose screen -gravity northwest "%s" tmp.png "%s"
 		""" % (width, path, outpath)
 
 	elif arguments["action"].value == "black white":
