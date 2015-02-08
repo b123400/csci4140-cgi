@@ -53,11 +53,49 @@ elif arguments["action"].value == "undo":
 else:
 	lastFilename = filenames[len(filenames)-1]
 	path = os.path.dirname(os.path.realpath(__file__))+"/files/"+lastFilename
-	command = "convert \""+path+"\" -bordercolor red -border 10 wow.jpg"
-	print("Content-type: text/html")
+	temppath = "temp.jpg"
+	outpath = "files/wow.jpg"
+	outfilename = "wow.jpg"
+	command = ""
+
+	identifyCommand = "identify %s" % path
+	output = subprocess.check_output(fileitem.filename, shell=True)
+	width, heigh = output.split(" ")[2].split("x")
+
+	if arguments["action"].value == "border":
+		command = """
+		convert "%s" -bordercolor red -border 10 "%s"
+		""" % (path, outpath)
+
+	elif arguments["action"].value == "lomo":
+		command = """
+		convert "%s" -channel R -level 33% -channel G -level 33% "%s"
+		""" % (path, outpath)
+
+	elif arguments["action"].value == "lens flare":
+		command = """
+		convert lensflare.png -resize %dx tmp.png;
+		composite -compose screen -gravity northwest tmp.png "%s" "%s"
+		""" % (width, path, outpath)
+
+	elif arguments["action"].value == "black white":
+		command = """
+		convert "%s" -type grayscale "%s";
+		convert bwgrad.png -resize %dx%d\! tmp.png;
+		composite -compose softlight -gravity center tmp.png %s %s;
+		""" % (path, temppath, width, height, temppath, outpath)
+
+	else if arguments["action"].value == "blur":
+		command = "convert %s -blur 0.5x2 %s" % (path, outpath)
+
+	else
+		print("Content-type: html/text\r\n\r\n")
+		print("unknow action"+arguments["action"].value)
+		exit(0)
+
 	print(command)
-	subprocess.call(command)
-	filenames.append('wow.jpg')
+	subprocess.call(command, shell=True)
+	filenames.append(outfilename)
 	cookie["filenames"] = ",".join(filenames)
 	print("Location: edit.cgi")
 	print(cookie)
