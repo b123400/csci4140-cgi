@@ -77,14 +77,14 @@ else:
 
 	elif arguments["action"].value == "lens flare":
 		command = """
-		convert lensflare.png -resize %dx tmp.png;
+		convert lensflare.png -resize %sx tmp.png;
 		composite -compose screen -gravity northwest tmp.png "%s" "%s"
 		""" % (width, path, outpath)
 
 	elif arguments["action"].value == "black white":
 		command = """
 		convert "%s" -type grayscale "%s";
-		convert bwgrad.png -resize %dx%d\! tmp.png;
+		convert bwgrad.png -resize %sx%s\! tmp.png;
 		composite -compose softlight -gravity center tmp.png %s %s;
 		""" % (path, temppath, width, height, temppath, outpath)
 
