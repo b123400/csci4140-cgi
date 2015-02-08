@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import Cookie
+import os
 import cgi
 import cgitb; cgitb.enable() # Optional; for debugging only
 
