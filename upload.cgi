@@ -20,7 +20,7 @@ if fileitem.filename:
 
 	# strip leading path from file name to avoid directory traversal attacks
 	extension = fileitem.filename.split(".")[-1].lower()
-	fn = uuid.uuid4()+"."+extension #os.path.basename(fileitem.filename)
+	fn = str(uuid.uuid4())+"."+extension #os.path.basename(fileitem.filename)
 
 	outpath = "files/"+fn
 

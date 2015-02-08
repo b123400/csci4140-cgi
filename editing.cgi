@@ -55,8 +55,8 @@ else:
 	lastFilename = filenames[len(filenames)-1]
 	extension = lastFilename.split(".")[-1].lower()
 	path = os.path.dirname(os.path.realpath(__file__))+"/files/"+lastFilename
-	temppath = uuid.uuid4()+"."+extension
-	outfilename = uuid.uuid4()+"."+extension
+	temppath = str(uuid.uuid4())+"."+extension
+	outfilename = str(uuid.uuid4())+"."+extension
 	outpath = "files/"+outfilename
 	command = ""
 
