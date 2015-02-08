@@ -8,6 +8,7 @@ import os
 import cgi
 import cgitb; cgitb.enable()
 import subprocess
+import uuid
 
 form = cgi.FieldStorage()
 
@@ -18,7 +19,8 @@ fileitem = form['file']
 if fileitem.filename:
 
 	# strip leading path from file name to avoid directory traversal attacks
-	fn = os.path.basename(fileitem.filename)
+	extension = fileitem.filename.split(".")[-1].lower()
+	fn = uuid.uuid4()+"."+extension #os.path.basename(fileitem.filename)
 
 	outpath = "files/"+fn
 
@@ -26,7 +28,6 @@ if fileitem.filename:
 		os.makedirs(os.path.dirname(outpath))
 
 	open(outpath, 'wb').write(fileitem.file.read())
-	message = 'The file "' + fn + '" was uploaded successfully'
 
 	# check format
 	identifyCommand = "identify %s" % outpath
@@ -35,7 +36,6 @@ if fileitem.filename:
 	#output = subprocess.check_output(fileitem.filename, shell=True)
 	output = output.split(" ")
 	imageFormat = output[1].lower()
-	extension = fileitem.filename.split(".")[-1].lower()
 
 	ok = False
 	if imageFormat == "png" or imageFormat == "gif" or imageFormat == "jpg":
@@ -43,7 +43,7 @@ if fileitem.filename:
 	if extension != imageFormat:
 		ok = False
 	if not ok :
-		print("Content-type: html/text\r\n\r\n")
+		print("Content-type: text/html\r\n\r\n")
 		print("wrong format")
 		exit(0)
 

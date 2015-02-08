@@ -5,6 +5,7 @@ import os
 import cgi
 import cgitb; cgitb.enable() # Optional; for debugging only
 import subprocess
+import uuid
 
 arguments = cgi.FieldStorage()
 
@@ -52,16 +53,17 @@ elif arguments["action"].value == "undo":
 
 else:
 	lastFilename = filenames[len(filenames)-1]
+	extension = lastFilename.split(".")[-1].lower()
 	path = os.path.dirname(os.path.realpath(__file__))+"/files/"+lastFilename
-	temppath = "temp.jpg"
-	outpath = "files/wow.jpg"
-	outfilename = "wow.jpg"
+	temppath = uuid.uuid4()+"."+extension
+	outfilename = uuid.uuid4()+"."+extension
+	outpath = "files/"+outfilename
 	command = ""
 
 	identifyCommand = "identify %s" % path
 	p = subprocess.Popen(identifyCommand, shell=True, stdout=subprocess.PIPE)
 	output = p.communicate()[0]
-	width, heigh = output.split(" ")[2].split("x")
+	width, height = output.split(" ")[2].split("x")
 
 	if arguments["action"].value == "border":
 		command = """
@@ -90,11 +92,12 @@ else:
 		command = "convert %s -blur 0.5x2 %s" % (path, outpath)
 
 	else:
-		print("Content-type: html/text\r\n\r\n")
+		print("Content-type: text/html\r\n\r\n")
 		print("unknow action"+arguments["action"].value)
 		exit(0)
 
-	print(command)
+	# print("Content-type: text/html\r\n\r\n")
+	# print(command)
 	subprocess.call(command, shell=True)
 	filenames.append(outfilename)
 	cookie["filenames"] = ",".join(filenames)
