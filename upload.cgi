@@ -20,9 +20,20 @@ if fileitem.filename:
 	# strip leading path from file name to avoid directory traversal attacks
 	fn = os.path.basename(fileitem.filename)
 
-	identifyCommand = "identify %s" % fn
+	outpath = "files/"+fn
+
+	if not os.path.exists(os.path.dirname(outpath)):
+		os.makedirs(os.path.dirname(outpath))
+
+	open(outpath, 'wb').write(fileitem.file.read())
+	message = 'The file "' + fn + '" was uploaded successfully'
+
+	# check format
+	identifyCommand = "identify %s" % output
 	p = subprocess.Popen(identifyCommand, shell=True, stdout=subprocess.PIPE)
 	output = p.communicate()[0]
+	print("Content-type: text/html\r\n\r\n");
+	print(output)
 	#output = subprocess.check_output(fileitem.filename, shell=True)
 	output = output.split(" ")
 	imageFormat = output[1].lowercase
@@ -38,13 +49,6 @@ if fileitem.filename:
 		print("wrong format")
 		exit(0)
 
-	outpath = "files/"+fn
-
-	if not os.path.exists(os.path.dirname(outpath)):
-		os.makedirs(os.path.dirname(outpath))
-
-	open(outpath, 'wb').write(fileitem.file.read())
-	message = 'The file "' + fn + '" was uploaded successfully'
 
 	cookie = Cookie.SimpleCookie()
 	try:
