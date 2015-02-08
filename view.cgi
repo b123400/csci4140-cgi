@@ -9,4 +9,4 @@ arguments = cgi.FieldStorage()
 
 print("Content-type: text/html\r\n\r\n")
 
-printf("""<img src="/files/%s" /> """ % arguments["image"].value)
+print("""<img src="/files/%s" /> """ % arguments["image"].value)
