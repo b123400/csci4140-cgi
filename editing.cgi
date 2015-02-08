@@ -1,15 +1,60 @@
 #!/usr/bin/python
 
+import Cookie
+import os
 import cgi
 import cgitb; cgitb.enable() # Optional; for debugging only
+import subprocess
 
 arguments = cgi.FieldStorage()
 
+cookie = Cookie.SimpleCookie()
+filenames = []
+try:
+	cookie = Cookie.SimpleCookie(os.environ["HTTP_COOKIE"])
+	filenames = cookie["filenames"].value
+	filenames = filenames.split(",")
+except Exception, e:
+	pass
+
+def deleteFile(filename):
+	os.remove('files/'+filename)
+
 if arguments["action"].value == "discard":
-	print("Location: index.cgi\r\n\r\n")
+
+	for filename in filenames:
+		deleteFile(filename)
+
+	cookie["filenames"] = ""
+	print("Location: index.cgi")
+	print(cookie)
+	print("\r\n\r\n")
+
 elif arguments["action"].value == "finish":
-	print("Location: view.cgi?id="+1+"\r\n\r\n")
+	lastFilename = filenames.pop()
+
+	for filename in filenames:
+		deleteFile(filename)
+
+	cookie["filenames"] = ""
+	print("Location: view.cgi?id="+str(1))
+	print(cookie)
+	print("\r\n\r\n")
+
 elif arguments["action"].value == "undo":
-	print("Location: edit.cgi\r\n\r\n")
+	lastFilename = filenames.pop()
+	deleteFile(lastFilename)
+	cookie["filenames"] = ",".join(filenames)
+
+	print("Location: edit.cgi")
+	print(cookie)
+	print("\r\n\r\n")
+
 else:
-	print("Location: edit.cgi\r\n\r\n")
+	lastFilename = filenames[len(filenames)-1]
+	subprocess.call("convert \"files/"+lastFilename+"\" -bordercolor #FF0000 -border 10 wow.jpg")
+	filenames.append('wow.jpg')
+	cookie["filenames"] = ",".join(filenames)
+	print("Location: edit.cgi")
+	print(cookie)
+	print("\r\n\r\n")
