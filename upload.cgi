@@ -29,15 +29,13 @@ if fileitem.filename:
 	message = 'The file "' + fn + '" was uploaded successfully'
 
 	# check format
-	identifyCommand = "identify %s" % output
+	identifyCommand = "identify %s" % outpath
 	p = subprocess.Popen(identifyCommand, shell=True, stdout=subprocess.PIPE)
 	output = p.communicate()[0]
-	print("Content-type: text/html\r\n\r\n");
-	print(output)
 	#output = subprocess.check_output(fileitem.filename, shell=True)
 	output = output.split(" ")
-	imageFormat = output[1].lowercase
-	extension = fileitem.filename.split(".")[-1].lowercase
+	imageFormat = output[1].lower()
+	extension = fileitem.filename.split(".")[-1].lower()
 
 	ok = False
 	if imageFormat == "png" or imageFormat == "gif" or imageFormat == "jpg":

@@ -59,7 +59,7 @@ else:
 	command = ""
 
 	identifyCommand = "identify %s" % path
-	output = subprocess.check_output(fileitem.filename, shell=True)
+	output = subprocess.check_output(identifyCommand, shell=True)
 	width, heigh = output.split(" ")[2].split("x")
 
 	if arguments["action"].value == "border":
