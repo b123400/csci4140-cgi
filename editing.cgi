@@ -52,7 +52,11 @@ elif arguments["action"].value == "undo":
 
 else:
 	lastFilename = filenames[len(filenames)-1]
-	subprocess.call("convert \"files/"+lastFilename+"\" -bordercolor #FF0000 -border 10 wow.jpg")
+	path = os.path.dirname(os.path.realpath(__file__))+"/files/"+lastFilename
+	command = "convert \""+path+"\" -bordercolor red -border 10 wow.jpg"
+	print("Content-type: text/html")
+	print(command)
+	subprocess.call(command)
 	filenames.append('wow.jpg')
 	cookie["filenames"] = ",".join(filenames)
 	print("Location: edit.cgi")
