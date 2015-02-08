@@ -39,7 +39,7 @@ print("""
 		<option value="Courier">Courier</option>
 		<option value="Helvetica">Helvetica</option>
 	</select>
-	Font size: <input name="fontsize" type="range" min="10" max="48" step="1" value="24" />
+	Font size: <input name="fontsize" type="number" min="10" max="48" step="1" value="24" />
 
 	<input name="action" type="submit" value="annotate top" />
 	<input name="action" type="submit" value="annotate bottom" />
