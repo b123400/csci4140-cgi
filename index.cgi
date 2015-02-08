@@ -18,7 +18,7 @@ canResume = False
 try:
 	cookie = Cookie.SimpleCookie(os.environ["HTTP_COOKIE"])
 	filenames = cookie["filenames"].value
-	if len(filenames) > 0
+	if len(filenames) > 0:
 		canResume = True
 except Exception, e:
 	pass
