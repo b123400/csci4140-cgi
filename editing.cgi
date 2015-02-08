@@ -59,7 +59,8 @@ else:
 	command = ""
 
 	identifyCommand = "identify %s" % path
-	output = subprocess.check_output(identifyCommand, shell=True)
+	p = subprocess.Popen(identifyCommand, shell=True, stdout=subprocess.PIPE)
+	output = p.communicate()[0]
 	width, heigh = output.split(" ")[2].split("x")
 
 	if arguments["action"].value == "border":
@@ -88,7 +89,7 @@ else:
 	elif arguments["action"].value == "blur":
 		command = "convert %s -blur 0.5x2 %s" % (path, outpath)
 
-	else
+	else:
 		print("Content-type: html/text\r\n\r\n")
 		print("unknow action"+arguments["action"].value)
 		exit(0)
