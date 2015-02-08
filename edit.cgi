@@ -1,5 +1,18 @@
 #!/usr/bin/python
 
+import cgi
+import cgitb; cgitb.enable() # Optional; for debugging only
+
+cookie = Cookie.SimpleCookie()
+lastFilename = ""
+try:
+	cookie = Cookie.SimpleCookie(os.environ["HTTP_COOKIE"])
+	filenames = cookie["filenames"].value
+	filenames = filenames.split(",")
+	lastFilename = filenames[len(filenames)-1]
+except Exception, e:
+	pass
+
 print("Content-type: text/html\r\n\r\n")
 
 print("""
@@ -7,18 +20,22 @@ print("""
 		<body>
 		
 		<form action="/editing.cgi" method="post">
-			edit page here
-			<input name="action" type="submit" value="filter1" />
-			<input name="action" type="submit" value="filter2" />
-			<input name="action" type="submit" value="filter2" />
+	""")
+	
+print("""<img src="/files/%s" alt="" />""" % lastFilename)
 
-			<input name="action" type="submit" value="text top" />
-			<input name="action" type="submit" value="text bottom" />
+print("""
+	<input name="action" type="submit" value="filter1" />
+	<input name="action" type="submit" value="filter2" />
+	<input name="action" type="submit" value="filter2" />
 
-			<input name="action" type="submit" value="undo" />
-			<input name="action" type="submit" value="discard" />
-			<input name="action" type="submit" value="finish" />
-		</form>
-		</body>
+	<input name="action" type="submit" value="text top" />
+	<input name="action" type="submit" value="text bottom" />
+
+	<input name="action" type="submit" value="undo" />
+	<input name="action" type="submit" value="discard" />
+	<input name="action" type="submit" value="finish" />
+	</form>
+	</body>
 	</html>
 	""")
