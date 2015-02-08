@@ -27,9 +27,11 @@ print("""
 print("""<img src="/files/%s" alt="" />""" % lastFilename)
 
 print("""
-	<input name="action" type="submit" value="filter1" />
-	<input name="action" type="submit" value="filter2" />
-	<input name="action" type="submit" value="filter2" />
+	<input name="action" type="submit" value="border" />
+	<input name="action" type="submit" value="lomo" />
+	<input name="action" type="submit" value="lens flare" />
+	<input name="action" type="submit" value="black white" />
+	<input name="action" type="submit" value="blur" />
 
 	<input name="action" type="submit" value="text top" />
 	<input name="action" type="submit" value="text bottom" />

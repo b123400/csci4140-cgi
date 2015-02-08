@@ -85,7 +85,7 @@ else:
 		composite -compose softlight -gravity center tmp.png %s %s;
 		""" % (path, temppath, width, height, temppath, outpath)
 
-	else if arguments["action"].value == "blur":
+	elif arguments["action"].value == "blur":
 		command = "convert %s -blur 0.5x2 %s" % (path, outpath)
 
 	else
