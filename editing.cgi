@@ -72,7 +72,7 @@ else:
 
 	elif arguments["action"].value == "lomo":
 		command = """
-		convert "%s" -channel R -level 33% -channel G -level 33% "%s"
+		convert "%s" -channel R -level 33%% -channel G -level 33% "%s"
 		""" % (path, outpath)
 
 	elif arguments["action"].value == "lens flare":

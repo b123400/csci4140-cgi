@@ -22,7 +22,7 @@ if fileitem.filename:
 	extension = fileitem.filename.split(".")[-1].lower()
 	fn = str(uuid.uuid4())+"."+extension #os.path.basename(fileitem.filename)
 
-	outpath = "files/"+fn
+	outpath = os.path.dirname(os.path.realpath(__file__))+"/files/"+fn
 
 	if not os.path.exists(os.path.dirname(outpath)):
 		os.makedirs(os.path.dirname(outpath))
