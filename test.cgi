@@ -1,4 +1,6 @@
 #!/usr/bin/python
 
 import os
-print("wow")
+print("Content-type: text/html\n\r")
+
+print("wow!!")
