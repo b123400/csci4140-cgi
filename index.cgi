@@ -29,7 +29,7 @@ print("""
 	""")
 
 onlyfiles = [ f for f in os.listdir(outpath) if os.path.isfile(join(outpath,f)) ]
-onlyfiles.sort(key=lambda x: os.path.getmtime(x))
+onlyfiles.sort(key=lambda x: os.path.getmtime(join(outpath,x)))
 for f in onlyfiles:
 	print("""
 		<a href="/view.cgi?image=%s">

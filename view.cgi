@@ -8,3 +8,5 @@ arguments = cgi.FieldStorage()
 print("Content-type: text/html\r\n\r\n")
 
 print("""<img src="/files/%s" /> """ % arguments["image"].value)
+
+print("""<a href="/">back to index</a> """)
