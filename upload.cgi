@@ -44,7 +44,7 @@ if fileitem.filename:
 		ok = False
 	if not ok :
 		print("Content-type: text/html\r\n\r\n")
-		print("wrong format")
+		print("wrong format extension:%s type:%s" % (extension, imageFormat))
 		exit(0)
 
 

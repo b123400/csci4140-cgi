@@ -6,6 +6,7 @@ import cgi
 import cgitb; cgitb.enable() # Optional; for debugging only
 import subprocess
 import uuid
+import shutil
 
 arguments = cgi.FieldStorage()
 
@@ -36,6 +37,10 @@ elif arguments["action"].value == "finish":
 
 	for filename in filenames:
 		deleteFile(filename)
+
+	if not os.path.exists("./finished/"):
+		os.makedirs("./finished/")
+	shutil.move("./files/"+lastFilename,"./finished/"+lastFilename);
 
 	cookie["filenames"] = ""
 	print("Location: view.cgi?image="+lastFilename)
@@ -94,7 +99,7 @@ else:
 	elif arguments["action"].value == "annotate top":
 		command = """
 		convert "%s" -background blue -pointsize %s -font %s label:%s +swap -gravity center -append "%s"
-		""" % (path, "12", "Arial", "WOWOW", outpath)
+		""" % (path, arguments["fontsize"].value, arguments["font"].value, arguments["message"].value, outpath)
 	elif arguments["action"].value == "annotate bottom":
 		command = """
 		convert "%s" -background blue -pointsize %s -font %s label:%s -gravity center -append "%s"

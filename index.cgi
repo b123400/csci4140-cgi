@@ -8,7 +8,7 @@ import cgi
 import cgitb; cgitb.enable() # Optional; for debugging only
 from os.path import isfile, join
 
-outpath = os.path.dirname(os.path.realpath(__file__))+"/files/"
+outpath = os.path.dirname(os.path.realpath(__file__))+"/finished/"
 
 if not os.path.exists(os.path.dirname(outpath)):
 	os.makedirs(os.path.dirname(outpath))
@@ -30,7 +30,7 @@ print("""
 
 onlyfiles = [ f for f in os.listdir(outpath) if os.path.isfile(join(outpath,f)) ]
 onlyfiles.sort(key=lambda x: os.path.getmtime(join(outpath,x)))
-for f in onlyfiles:
+for f in reversed(onlyfiles):
 	print("""
 		<a href="/view.cgi?image=%s">
 		<div style="width:200px; height:200px; background-image:url(/files/%s); background-size:cover; display:inline-block;"></div>
