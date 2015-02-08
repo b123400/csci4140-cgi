@@ -3,4 +3,4 @@
 # save file
 # add to cookie
 
-print("Location: /edit.cgi\r\n\r\n")
+print("Location: edit.cgi\r\n\r\n")
