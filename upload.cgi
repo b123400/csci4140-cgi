@@ -21,17 +21,19 @@ if fileitem.filename:
 	fn = os.path.basename(fileitem.filename)
 
 	identifyCommand = "identify %s" % fn
-	output = subprocess.check_output(fileitem.filename, shell=True)
+	p = subprocess.Popen(identifyCommand, shell=True, stdout=subprocess.PIPE)
+	output = p.communicate()[0]
+	#output = subprocess.check_output(fileitem.filename, shell=True)
 	output = output.split(" ")
 	imageFormat = output[1].lowercase
 	extension = fileitem.filename.split(".")[-1].lowercase
 
 	ok = False
-	if imageFormat == "png" || imageFormat == "gif" || imageFormat == "jpg":
+	if imageFormat == "png" or imageFormat == "gif" or imageFormat == "jpg":
 		ok = True
 	if extension != imageFormat:
 		ok = False
-	if !ok :
+	if not ok :
 		print("Content-type: html/text\r\n\r\n")
 		print("wrong format")
 		exit(0)
