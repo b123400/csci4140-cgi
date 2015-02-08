@@ -33,8 +33,8 @@ print("""
 	<input name="action" type="submit" value="black white" />
 	<input name="action" type="submit" value="blur" />
 
-	<input name="action" type="submit" value="text top" />
-	<input name="action" type="submit" value="text bottom" />
+	<input name="action" type="submit" value="annotate top" />
+	<input name="action" type="submit" value="annotate bottom" />
 
 	<input name="action" type="submit" value="undo" />
 	<input name="action" type="submit" value="discard" />

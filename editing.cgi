@@ -91,6 +91,15 @@ else:
 	elif arguments["action"].value == "blur":
 		command = "convert %s -blur 0.5x2 %s" % (path, outpath)
 
+	elif arguments["action"].value == "annotate top":
+		command = """
+		convert "%s" -background blue -pointsize %s -font %s label:%s +swap -gravity center -append "%s"
+		""" % (path, "12", "Arial", "WOWOW", outpath)
+	elif arguments["action"].value == "annotate bottom":
+		command = """
+		convert "%s" -background blue -pointsize %s -font %s label:%s -gravity center -append "%s"
+		""" % (path, "12", "Arial", "WOWOW", outpath)
+
 	else:
 		print("Content-type: text/html\r\n\r\n")
 		print("unknow action"+arguments["action"].value)
