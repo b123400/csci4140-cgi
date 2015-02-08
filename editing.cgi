@@ -98,7 +98,7 @@ else:
 	elif arguments["action"].value == "annotate bottom":
 		command = """
 		convert "%s" -background blue -pointsize %s -font %s label:%s -gravity center -append "%s"
-		""" % (path, "12", "Arial", "WOWOW", outpath)
+		""" % (path, arguments["fontsize"].value, arguments["font"].value, arguments["message"].value, outpath)
 
 	else:
 		print("Content-type: text/html\r\n\r\n")
