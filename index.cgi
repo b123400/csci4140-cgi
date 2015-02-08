@@ -28,13 +28,17 @@ print("""
 		<body>
 	""")
 
-onlyfiles = [ f for f in o2.path.listdir(outpath) if os.path.isfile(join(outpath,f)) ]
-
+onlyfiles = [ f for f in os.listdir(outpath) if os.path.isfile(join(outpath,f)) ]
+onlyfiles.sort(key=lambda x: os.path.getmtime(x))
 for f in onlyfiles:
-	print("""<div style="width:200px; height:200px; background-image:url(/files/%s); background-size:cover; display:inline-block;"/> """ % f)
+	print("""
+		<a href="/view.cgi?image=%s">
+		<div style="width:200px; height:200px; background-image:url(/files/%s); background-size:cover; display:inline-block;"></div>
+		</a>""" % (f,f)
+		)
 
 if canResume:
-	print("""<a href="/resume.cgi">resume</a>""")
+	print("""<a href="/edit.cgi">resume</a>""")
 
 print("""
 			<a href="/upload.html">upload</a>

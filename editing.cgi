@@ -38,7 +38,7 @@ elif arguments["action"].value == "finish":
 		deleteFile(filename)
 
 	cookie["filenames"] = ""
-	print("Location: view.cgi?id="+str(1))
+	print("Location: view.cgi?image="+str(1))
 	print(cookie)
 	print("\r\n\r\n")
 
