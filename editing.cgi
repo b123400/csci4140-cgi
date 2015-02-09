@@ -106,7 +106,7 @@ else:
 			exit(0)
 
 		command = """
-		convert "%s" -background blue -pointsize %s -font %s label:%s +swap -gravity center -append "%s"
+		convert "%s" -background blue -pointsize %s -font %s label:"%s" +swap -gravity center -append "%s"
 		""" % (path, arguments["fontsize"].value, arguments["font"].value, message, outpath)
 	elif arguments["action"].value == "annotate bottom":
 		message = ""
@@ -118,7 +118,7 @@ else:
 			exit(0)
 			
 		command = """
-		convert "%s" -background blue -pointsize %s -font %s label:%s -gravity center -append "%s"
+		convert "%s" -background blue -pointsize %s -font %s label:"%s" -gravity center -append "%s"
 		""" % (path, arguments["fontsize"].value, arguments["font"].value, message, outpath)
 
 	else:
