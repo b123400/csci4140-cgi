@@ -44,17 +44,15 @@ if fileitem.filename:
 		#output = subprocess.check_output(fileitem.filename, shell=True)
 		output = output.split(" ")
 		imageFormat = output[1].lower()
-		if imageFormat != "png" and imageFormat != "gif" and imageFormat != "jpg":
-			print("Content-type: text/html\r\n\r\n")
-			print("wrong extension:%s, only accept png/gif/jpg" % extension)
-			exit(0)
 		if imageFormat == "jpeg":
 			imageFormat = "jpg"
 
-		ok = False
+		if imageFormat != "png" and imageFormat != "gif" and imageFormat != "jpg":
+			print("Content-type: text/html\r\n\r\n")
+			print("wrong type:%s, only accept png/gif/jpg" % imageFormat)
+			exit(0)
+
 		if extension != imageFormat:
-			ok = False
-		if not ok :
 			print("Content-type: text/html\r\n\r\n")
 			print("wrong format extension:%s type:%s" % (extension, imageFormat))
 			exit(0)
