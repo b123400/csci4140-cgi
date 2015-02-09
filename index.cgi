@@ -33,7 +33,7 @@ except Exception, e:
 
 print("""
 	<html>
-		<body>
+		<body style="text-align:center;">
 		<div style="width: 800px; margin: auto;">
 	""")
 
