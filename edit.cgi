@@ -20,34 +20,39 @@ print("Content-type: text/html\r\n\r\n")
 print("""
 	<html>
 		<body>
-		
-		<form action="/editing.cgi" method="post">
+		<table style="width:100%;">
+			<tr>
+				<td style="width:50%;">
 	""")
-	
+
 print("""<img src="/files/%s" alt="" />""" % lastFilename)
 
 print("""
-	<input name="action" type="submit" value="border" />
-	<input name="action" type="submit" value="lomo" />
-	<input name="action" type="submit" value="lens flare" />
-	<input name="action" type="submit" value="black white" />
-	<input name="action" type="submit" value="blur" />
-
-	Message: <input type="text" name="message" />
-	Font: <select name="font">
-		<option value="Times">Times</option>
-		<option value="Courier">Courier</option>
-		<option value="Helvetica">Helvetica</option>
-	</select>
-	Font size: <input name="fontsize" type="number" min="10" max="48" step="1" value="24" />
-
-	<input name="action" type="submit" value="annotate top" />
-	<input name="action" type="submit" value="annotate bottom" />
-
-	<input name="action" type="submit" value="undo" />
-	<input name="action" type="submit" value="discard" />
-	<input name="action" type="submit" value="finish" />
-	</form>
+	</td>
+	<td>
+		<form action="/editing.cgi" method="post">
+		<input name="action" type="submit" value="border" />
+		<input name="action" type="submit" value="lomo" />
+		<input name="action" type="submit" value="lens flare" />
+		<input name="action" type="submit" value="black white" />
+		<input name="action" type="submit" value="blur" /> <BR/>
+		=======================
+		Message: <input type="text" name="message" /> <BR/>
+		Font: <select name="font"><BR/>
+			<option value="Times">Times</option>
+			<option value="Courier">Courier</option>
+			<option value="Helvetica">Helvetica</option>
+		</select><BR/>
+		Font size: <input name="fontsize" type="number" min="10" max="48" step="1" value="24" /><BR/>
+		
+		<input name="action" type="submit" value="annotate top" />
+		<input name="action" type="submit" value="annotate bottom" /><BR/>
+		===================== <BR/>
+		<input name="action" type="submit" value="undo" />
+		<input name="action" type="submit" value="discard" />
+		<input name="action" type="submit" value="finish" />
+		</form>
+		</td>
 	</body>
 	</html>
 	""")

@@ -34,6 +34,7 @@ except Exception, e:
 print("""
 	<html>
 		<body>
+		<div style="width: 800px; margin: auto;">
 	""")
 
 onlyfiles = [ f for f in os.listdir(outpath) if os.path.isfile(join(outpath,f)) ]
@@ -45,10 +46,12 @@ for f in reversed(onlyfiles):
 	elif i >= 8*page:
 		print("""
 			<a href="/view.cgi?image=%s">
-			<div style="width:200px; height:200px; background-image:url(/finished/%s); background-size:cover; display:inline-block;"></div>
+			<div style="float:left; width:200px; height:200px; background-image:url(/finished/%s); background-size:cover; display:inline-block;"></div>
 			</a>""" % (f,f)
 			)
 	i += 1
+
+print("""<div style="clear:both;"></div></div>""")
 
 pageCount = math.ceil(len(onlyfiles) / 8.0)
 if page > 0:
@@ -61,7 +64,7 @@ if page < pageCount-1:
 
 if canResume:
 	print("""<a href="/edit.cgi">resume</a>""")
-	
+
 print("""
 			<a href="/upload.html">upload</a>
 		</body>
