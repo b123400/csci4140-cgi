@@ -97,13 +97,29 @@ else:
 		command = "convert %s -blur 0.5x2 %s" % (path, outpath)
 
 	elif arguments["action"].value == "annotate top":
+		message = ""
+		try:
+			message = arguments["message"].value
+		except Exception, e:
+			print("Content-type: text/html\r\n\r\n")
+			print("no message")
+			exit(0)
+
 		command = """
 		convert "%s" -background blue -pointsize %s -font %s label:%s +swap -gravity center -append "%s"
-		""" % (path, arguments["fontsize"].value, arguments["font"].value, arguments["message"].value, outpath)
+		""" % (path, arguments["fontsize"].value, arguments["font"].value, message, outpath)
 	elif arguments["action"].value == "annotate bottom":
+		message = ""
+		try:
+			message = arguments["message"].value
+		except Exception, e:
+			print("Content-type: text/html\r\n\r\n")
+			print("no message")
+			exit(0)
+			
 		command = """
 		convert "%s" -background blue -pointsize %s -font %s label:%s -gravity center -append "%s"
-		""" % (path, arguments["fontsize"].value, arguments["font"].value, arguments["message"].value, outpath)
+		""" % (path, arguments["fontsize"].value, arguments["font"].value, message, outpath)
 
 	else:
 		print("Content-type: text/html\r\n\r\n")
