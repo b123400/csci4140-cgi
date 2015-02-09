@@ -55,15 +55,15 @@ print("""<div style="clear:both;"></div></div>""")
 
 pageCount = math.ceil(len(onlyfiles) / 8.0)
 if page > 0:
-	print(""" <a href="/?page=%d">prev</a> """ % (page-1))
+	print(""" <a href="/?page=%d">prev</a> | """ % (page-1))
 
 print(""" page %d of %d """ %(page+1, pageCount))
 
 if page < pageCount-1:
-	print(""" <a href="/?page=%d">next</a> """ % (page+1))
+	print(""" | <a href="/?page=%d">next</a> """ % (page+1))
 
 if canResume:
-	print("""<a href="/edit.cgi">resume</a>""")
+	print("""<BR/> ===================== <BR/><a href="/edit.cgi">resume</a> | """)
 
 print("""
 			<a href="/upload.html">upload</a>
