@@ -37,6 +37,11 @@ if fileitem.filename:
 	output = output.split(" ")
 	imageFormat = output[1].lower()
 
+	if imageFormat == "jpeg":
+		imageFormat = "jpg"
+	if extension == "jpeg":
+		extension = "jpg"
+
 	ok = False
 	if imageFormat == "png" or imageFormat == "gif" or imageFormat == "jpg":
 		ok = True

@@ -7,8 +7,11 @@ import os
 import cgi
 import cgitb; cgitb.enable() # Optional; for debugging only
 from os.path import isfile, join
+import math
 
 outpath = os.path.dirname(os.path.realpath(__file__))+"/finished/"
+arguments = cgi.FieldStorage()
+page = 0
 
 if not os.path.exists(os.path.dirname(outpath)):
 	os.makedirs(os.path.dirname(outpath))
@@ -23,6 +26,11 @@ try:
 except Exception, e:
 	pass
 
+try:
+	page = int(arguments["page"].value)
+except Exception, e:
+	pass
+
 print("""
 	<html>
 		<body>
@@ -30,15 +38,29 @@ print("""
 
 onlyfiles = [ f for f in os.listdir(outpath) if os.path.isfile(join(outpath,f)) ]
 onlyfiles.sort(key=lambda x: os.path.getmtime(join(outpath,x)))
+i = 0
 for f in reversed(onlyfiles):
-	print("""
-		<a href="/view.cgi?image=%s">
-		<div style="width:200px; height:200px; background-image:url(/files/%s); background-size:cover; display:inline-block;"></div>
-		</a>""" % (f,f)
-		)
+	if i >= 8*(page+1):
+		break
+	elif i >= 8*page:
+		print("""
+			<a href="/view.cgi?image=%s">
+			<div style="width:200px; height:200px; background-image:url(/finished/%s); background-size:cover; display:inline-block;"></div>
+			</a>""" % (f,f)
+			)
+	i++
 
 if canResume:
 	print("""<a href="/edit.cgi">resume</a>""")
+
+pageCount = math.ceil(len(onlyfiles) / 8.0)
+if page > 0:
+	print(""" <a href="/?page=%d">prev</a> """ % page-1)
+
+print(""" page %d of %d """ %(page+1, pageCount))
+
+if page < pageCount-1:
+	print(""" <a href="/?page=%d">next</a> """ % page+1)
 
 print("""
 			<a href="/upload.html">upload</a>
