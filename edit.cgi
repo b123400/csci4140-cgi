@@ -14,7 +14,7 @@ try:
 	lastFilename = filenames[len(filenames)-1]
 except Exception, e:
 	print("Content-type: text/html\r\n\r\n")
-	printf("no photo to edit");
+	print("no photo to edit");
 	exit(0)
 
 print("Content-type: text/html\r\n\r\n")
