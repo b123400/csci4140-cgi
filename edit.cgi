@@ -19,6 +19,10 @@ except Exception, e:
 
 print("Content-type: text/html\r\n\r\n")
 
+if lastFilename == "":
+	printf("no photo to edit");
+	exit(0);
+
 print("""
 	<html>
 		<body>
