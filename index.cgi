@@ -48,7 +48,7 @@ for f in reversed(onlyfiles):
 			<div style="width:200px; height:200px; background-image:url(/finished/%s); background-size:cover; display:inline-block;"></div>
 			</a>""" % (f,f)
 			)
-	i++
+	i += 1
 
 if canResume:
 	print("""<a href="/edit.cgi">resume</a>""")
