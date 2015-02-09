@@ -24,11 +24,11 @@ if fileitem.filename:
 
 	if extension == "jpeg":
 		extension = "jpg"
-	if imageFormat != "png" and imageFormat != "gif" and imageFormat != "jpg":
+	if extension != "png" and extension != "gif" and extension != "jpg":
 		print("Content-type: text/html\r\n\r\n")
 		print("wrong extension:%s, only accept png/gif/jpg" % extension)
 		exit(0)
-	
+
 	outpath = os.path.dirname(os.path.realpath(__file__))+"/files/"+fn
 
 	if not os.path.exists(os.path.dirname(outpath)):
@@ -44,7 +44,10 @@ if fileitem.filename:
 		#output = subprocess.check_output(fileitem.filename, shell=True)
 		output = output.split(" ")
 		imageFormat = output[1].lower()
-
+		if imageFormat != "png" and imageFormat != "gif" and imageFormat != "jpg":
+			print("Content-type: text/html\r\n\r\n")
+			print("wrong extension:%s, only accept png/gif/jpg" % extension)
+			exit(0)
 		if imageFormat == "jpeg":
 			imageFormat = "jpg"
 
