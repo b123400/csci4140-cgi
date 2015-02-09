@@ -13,7 +13,9 @@ try:
 	filenames = filenames.split(",")
 	lastFilename = filenames[len(filenames)-1]
 except Exception, e:
-	pass
+	print("Content-type: text/html\r\n\r\n")
+	printf("no photo to edit");
+	exit(0)
 
 print("Content-type: text/html\r\n\r\n")
 
@@ -36,7 +38,7 @@ print("""
 		<input name="action" type="submit" value="lens flare" />
 		<input name="action" type="submit" value="black white" />
 		<input name="action" type="submit" value="blur" /> <BR/>
-		=======================
+		=======================<BR/>
 		Message: <input type="text" name="message" /> <BR/>
 		Font: <select name="font"><BR/>
 			<option value="Times">Times</option>
