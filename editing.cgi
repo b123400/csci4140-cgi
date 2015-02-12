@@ -23,7 +23,7 @@ def deleteFile(filename):
 	os.remove('files/'+filename)
 
 def shellquote(s):
-	return "'" + s.replace("'", "'\\''") + "'"
+	return s.replace("\"", "\\\"")
 
 if arguments["action"].value == "discard":
 
