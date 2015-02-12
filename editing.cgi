@@ -22,6 +22,9 @@ except Exception, e:
 def deleteFile(filename):
 	os.remove('files/'+filename)
 
+def shellquote(s):
+	return "'" + s.replace("'", "'\\''") + "'"
+
 if arguments["action"].value == "discard":
 
 	for filename in filenames:
@@ -107,7 +110,7 @@ else:
 
 		command = """
 		convert "%s" -background blue -pointsize %s -font %s label:"%s" +swap -gravity center -append "%s"
-		""" % (path, arguments["fontsize"].value, arguments["font"].value, message, outpath)
+		""" % (path, arguments["fontsize"].value, arguments["font"].value, shellquote(message), outpath)
 	elif arguments["action"].value == "annotate bottom":
 		message = ""
 		try:
@@ -119,7 +122,7 @@ else:
 			
 		command = """
 		convert "%s" -background blue -pointsize %s -font %s label:"%s" -gravity center -append "%s"
-		""" % (path, arguments["fontsize"].value, arguments["font"].value, message, outpath)
+		""" % (path, arguments["fontsize"].value, arguments["font"].value, shellquote(message), outpath)
 
 	else:
 		print("Content-type: text/html\r\n\r\n")

@@ -45,7 +45,7 @@ print("""
 		=======================<BR/>
 		Message: <input type="text" name="message" /> <BR/>
 		Font: <select name="font"><BR/>
-			<option value="Times">Times</option>
+			<option value="Times-Roman">Times</option>
 			<option value="Courier">Courier</option>
 			<option value="Helvetica">Helvetica</option>
 		</select><BR/>
